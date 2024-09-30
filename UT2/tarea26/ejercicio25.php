@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla</title>
+    <title>Ejercicio 2.5</title>
     <style>
         table, th, td {
             border: 1px solid black;
@@ -12,10 +12,10 @@
 </head>
 <body>
     <?php
-    $filas = $_REQUEST['filas'];
-    $columnas = $_REQUEST['columnas'];
+    $filas = $_GET['filas'];
+    $columnas = $_GET['columnas'];
     ?>
-    
+    <hr>
     <table>
         <tr>
             <?php
