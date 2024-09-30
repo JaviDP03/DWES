@@ -15,7 +15,6 @@
     $filas = $_GET['filas'];
     $columnas = $_GET['columnas'];
     ?>
-    <hr>
     <table>
         <tr>
             <?php
