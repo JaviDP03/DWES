@@ -11,18 +11,24 @@
     <h3>Original</h3>
     <?php
     $listaNumeros = array(4, 3, 87, 24, 50);
+    imprimirListaNumeros($listaNumeros);
     unset($listaNumeros[2]);
-    echo "<pre>";
-    print_r($listaNumeros);
-    echo "</pre>";
+    imprimirListaNumeros($listaNumeros);
     ?>
     <br>
     <h3>Copia</h3>
     <pre>
-    <?php
-    print_r(array_values($listaNumeros));
+        <?php
+        imprimirListaNumeros($listaNumeros);
     ?>
     </pre>
 </body>
 
 </html>
+<?php
+function imprimirListaNumeros ($listaNumeros) {
+    echo "<pre>";
+    print_r(array_values($listaNumeros));
+    echo "</pre>";
+}
+?>

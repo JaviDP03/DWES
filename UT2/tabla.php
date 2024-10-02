@@ -12,25 +12,25 @@
 </head>
 <body>
     <?php
-    $filas = $_REQUEST['filas'];
-    $columnas = $_REQUEST['columnas'];
+    $filas = $_GET['filas'];
+    $columnas = $_GET['columnas'];
     ?>
     
     <table>
         <tr>
-            <?php
-            for ($i=0; $i < $columnas; $i++) { 
-                echo "<th>Cabecera</th>";
-            }
-            ?>
+        <?php
+        for ($i=0; $i < $columnas; $i++) { 
+            echo "\t\t\t<th>Cabecera</th>\n";
+        }
+        ?>
         </tr>
         <?php
         for ($i=1; $i < $filas; $i++) { 
-            echo "<tr>";
+            echo "<tr>\n";
             for ($j=0; $j < $columnas; $j++) { 
-                echo "<td>Cuerpo</td>";
+                echo "\t\t\t<td>Cuerpo</td>\n";
             }
-            echo "</tr>";
+            echo "\t\t</tr>\n";
         }
         ?>
     </table>
