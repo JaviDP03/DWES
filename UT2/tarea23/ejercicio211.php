@@ -18,8 +18,8 @@
     <br>
     <h3>Copia</h3>
     <pre>
-        <?php
-        imprimirListaNumeros($listaNumeros);
+    <?php
+    print_r(array_values($listaNumeros));
     ?>
     </pre>
 </body>
@@ -28,7 +28,7 @@
 <?php
 function imprimirListaNumeros ($listaNumeros) {
     echo "<pre>";
-    print_r(array_values($listaNumeros));
+    print_r($listaNumeros);
     echo "</pre>";
 }
 ?>
