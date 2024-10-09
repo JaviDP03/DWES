@@ -7,6 +7,7 @@ $formulario = array(
     array("Nuevo", "estado", "radio", "nuevo", "Estado del libro"),
     array("Seminuevo", "estado", "radio", "seminuevo", "Estado del libro"),
     array("Usado", "estado", "radio", "usado", "Estado del libro"),
+    array("", "oculto", "hidden", "1", ""),
     array("Fantasía", "genero[]", "checkbox", "fantasia", "Género"),
     array("Terror", "genero[]", "checkbox", "terror", "Género"),
     array("Comedia", "genero[]", "checkbox", "comedia", "Género"),
@@ -46,8 +47,13 @@ for ($i = 0; $i < count($formulario); $i++) {
         if ($i != 0 && ($formulario[$i - 1][2] == "radio" || $formulario[$i - 1][2] == "checkbox")) {
             echo "</p>";
         }
-        echo "<p>" . $formulario[$i][0] . ": ";
-        echo "<input type=\"" . $formulario[$i][2] . "\" name=\"" . $formulario[$i][1] . "\" placeholder=\"" . $formulario[$i][3] . "\"></p>";
+        // Hidden
+        if ($formulario[$i][2] == "hidden") {
+            echo "<input type=\"" . $formulario[$i][2] . "\" name=\"" . $formulario[$i][1] . "\" value=\"" . $formulario[$i][3] . "\"></p>";
+        } else {
+            echo "<p>" . $formulario[$i][0] . ": ";
+            echo "<input type=\"" . $formulario[$i][2] . "\" name=\"" . $formulario[$i][1] . "\" placeholder=\"" . $formulario[$i][3] . "\"></p>";
+        }
     }
 }
 echo "<p><input type=\"submit\" value=\"Enviar\"><p>";
