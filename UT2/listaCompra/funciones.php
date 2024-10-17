@@ -1,6 +1,8 @@
 <?php
 // Recibe un array con información de un producto POR REFERENCIA y le asigna el valor de total
-function calcularPrecioTotalProducto(/* producto */) {}
+function calcularPrecioTotalProducto($producto) {
+    $producto['total'] = $producto['cantidad'] * $producto['precio'];
+}
 // Recibe lista de productos
 // Devuelve la suma de todos los totales
 function calcularPrecioTotalCompra(/* productos */) {}
