@@ -14,20 +14,22 @@ if (isset($_REQUEST['submit'])) {
 <head>
     <title>Lista de la compra</title>
     <style>
-        table,
-        th,
-        td {
+        th, td {
             border: 1px solid;
+            border-collapse: collapse;
+        }
+
+        .derecha {
+            text-align: right;
+        }
+
+        .vacio {
+            border: 0px;
         }
     </style>
 </head>
 
 <body>
-    <pre>
-        <?php
-        print_r($_POST);
-        ?>
-    </pre>
     <h2>LISTA DE LA COMPRA PARA EL <?= date("d/m/Y") ?></h2>
     <?php
     if (empty($_REQUEST)) {
@@ -37,31 +39,18 @@ if (isset($_REQUEST['submit'])) {
         $producto['nombre'] = $_POST['nombre'];
         $producto['cantidad'] = $_POST['cantidad'];
         $producto['precio'] = $_POST['precio'];
+        calcularPrecioTotalProducto($producto);
         $productos[] = $producto;
-        ?>
-        <table>
-            <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-            </tr>
-            <?php
-            foreach ($productos as $producto) {
-                echo "<tr>";
-                echo "<td>{$producto['nombre']}</td>";
-                echo "<td>{$producto['cantidad']}</td>";
-                echo "<td>{$producto['precio']}</td>";
-            }
-            ?>
-        </table>
-
-    <?php } ?>
+        
+        mostrarTabla($productos);
+    }
+    ?>
 
     <h2>Añadir producto</h2>
     <form method="POST">
-        <p>Producto:* <input type="text" name="nombre"></p>
-        <p>Cantidad:* <input type="number" min="0.1" step="0.1" name="cantidad"></p>
-        <p>Precio:* <input type="number" min="0.1" step="0.1" name="precio"></p>
+        <p>Producto:* <input type="text" name="nombre" value="Nombre Producto"></p>
+        <p>Cantidad:* <input type="number" min="0.1" step="0.1" name="cantidad" value="1"></p>
+        <p>Precio:* <input type="number" min="0.1" step="0.1" name="precio" value="1"></p>
         <p><input type="submit" name="submit"></p>
         <?php echo hiddenProductos($productos); ?>
     </form>

@@ -1,11 +1,20 @@
 <?php
 // Recibe un array con información de un producto POR REFERENCIA y le asigna el valor de total
-function calcularPrecioTotalProducto($producto) {
+function calcularPrecioTotalProducto(&$producto)
+{
     $producto['total'] = $producto['cantidad'] * $producto['precio'];
 }
 // Recibe lista de productos
 // Devuelve la suma de todos los totales
-function calcularPrecioTotalCompra(/* productos */) {}
+function calcularPrecioTotalCompra($productos) {
+    $totalCompra = 0;
+
+    foreach ($productos as $producto) {
+        $totalCompra += $producto['total'];
+    }
+
+    return $totalCompra;
+}
 function hiddenProductos($productos)
 {
     $html = "";
@@ -36,3 +45,29 @@ function recuperarProductos()
     }
     return $productos;
 }
+
+function mostrarTabla($productos)
+{ ?>
+    <table>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total</th>
+        </tr>
+        <?php
+        foreach ($productos as $producto) {
+            echo "<tr>";
+            echo "<td>{$producto['nombre']}</td>";
+            echo "<td class=\"derecha\">{$producto['cantidad']}</td>";
+            echo "<td class=\"derecha\">{$producto['precio']}€</td>";
+            echo "<td class=\"derecha\">{$producto['total']}€</td>";
+            echo "</tr>";
+        }
+        ?>
+        <tr>
+            <td class="vacio" colspan="3"></td>
+            <td class="derecha"><?= calcularPrecioTotalCompra($productos) ?>€</td>
+        </tr>
+    </table>
+<?php }
