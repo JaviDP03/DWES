@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clasificación LaLiga</title>
     <style>
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid;
         }
 
@@ -41,6 +43,13 @@
         "Valladolid",
         "U.D. Las Palmas"
     );
+
+    $posicion = isset($_GET['posicion']) ? $_GET['posicion'] : 1;
+    if ($posicion < 1 || $posicion > count($equipos)) {
+        $posicion = 1;
+    }
+    $nombre = isset($_GET['nombre']) ? $_GET['nombre'] : "";
+    $equipoEncontrado = false;
     ?>
     <table>
         <tr>
@@ -48,11 +57,26 @@
             <th>Club</th>
         </tr>
         <?php
-        for ($i = 0; $i < count($equipos); $i++) {
-            echo "<tr>";
-            echo "<td class=\"derecha\">" . $i + 1 . "</td>";
-            echo "<td>$equipos[$i]</td>";
-            echo "</tr>";
+        for ($i = $posicion - 1; $i < count($equipos); $i++) {
+            if ($nombre == $equipos[$i]) {
+                $equipoEncontrado = true;
+            }
+
+            if ($equipoEncontrado || $nombre == "") {
+                echo "<tr>";
+                echo "<td class=\"derecha\">" . $i + 1 . "</td>";
+                echo "<td>$equipos[$i]</td>";
+                echo "</tr>";
+            }
+        }
+
+        if (!$equipoEncontrado && $nombre != "") {
+            for ($i = 0; $i < count($equipos); $i++) {
+                echo "<tr>";
+                echo "<td class=\"derecha\">" . $i + 1 . "</td>";
+                echo "<td>$equipos[$i]</td>";
+                echo "</tr>";
+            }
         }
         ?>
 </body>
