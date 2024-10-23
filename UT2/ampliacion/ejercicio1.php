@@ -32,6 +32,9 @@
         </p>
         <p><input type="submit" name="submit"></p>
     </form>
+    <?php
+    
+    ?>
 </body>
 
 </html>
