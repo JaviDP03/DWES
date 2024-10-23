@@ -9,7 +9,7 @@
 
 <body>
     <h2>Formulario de correo</h2>
-    <form>
+    <form method="POST">
         <p>
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre">
@@ -28,8 +28,9 @@
         </p>
         <p>
             <label for="mensaje">Mensaje:</label><br>
-            <textarea id="mensaje" name="mensaje"></textarea>
+            <textarea id="mensaje" name="mensaje" cols="30" rows="5"></textarea>
         </p>
+        <p><input type="submit" name="submit"></p>
     </form>
 </body>
 

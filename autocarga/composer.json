@@ -1,0 +1,15 @@
+{
+    "name": "usuario/autocarga",
+    "autoload": {
+        "psr-4": {
+            "DWES\\": "Clases"
+        }
+    },
+    "authors": [
+        {
+            "name": "Javier Duarte",
+            "email": "javiduarte34@gmail.com"
+        }
+    ],
+    "require": {}
+}
