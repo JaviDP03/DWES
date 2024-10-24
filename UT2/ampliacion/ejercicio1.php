@@ -39,6 +39,10 @@
         $tipomensaje = $_POST['tipomensaje'];
         $mensaje = $_POST['mensaje'];
 
+        echo "<pre>";
+        print_r($_POST);
+        echo "</pre>";
+
         mail($email, $tipomensaje, $mensaje);
     }
     ?>
