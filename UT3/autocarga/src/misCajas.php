@@ -7,3 +7,5 @@ $miCaja = new Caja();
 
 $miCaja->introduce("algo");
 $miCaja->muestraContenido();
+
+echo $miCaja->__toString();
