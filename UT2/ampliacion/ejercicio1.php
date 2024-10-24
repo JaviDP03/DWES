@@ -33,7 +33,14 @@
         <p><input type="submit" name="submit"></p>
     </form>
     <?php
-    
+    if (!empty($_POST)) {
+        $nombre = $_POST['nombre'];
+        $email = $_POST['email'];
+        $tipomensaje = $_POST['tipomensaje'];
+        $mensaje = $_POST['mensaje'];
+
+        mail($email, $tipomensaje, $mensaje);
+    }
     ?>
 </body>
 
