@@ -1,12 +1,22 @@
 <?php
-if ($bd = new PDO('mysql:host=localhost;dbname=tienda', 'root', '')) {
-    echo "Conexión con éxito";
-} else {
-    echo "Fallo en la conexión";
+$bd = new PDO('mysql:host=localhost;dbname=tienda', 'root', '');
+
+$ok = true;
+$bd->beginTransaction();
+if (!$registros = $bd->exec("UPDATE stock SET unidades = unidades-1 WHERE producto = '3DSNG' AND tienda = 1")) {
+    $ok = false;
 }
+echo "<p>Se han actualizado $registros registro/s de la tienda 1</p>";
 
-$actualizar = $bd->exec("UPDATE stock SET unidades = unidades-1 WHERE producto = '3DSNG' AND tienda = 1");
-echo "<p>Se han actualizado $actualizar registros.</p>";
+if (!$registros = $bd->exec("UPDATE stock SET unidades = unidades+1 WHERE producto = '3DSNG' AND tienda = 3")) {
+    $ok = false;
+}
+echo "<p>Se han actualizado $registros registro/s de la tienda 3</p>";
 
-$insertar = $bd->exec("INSERT INTO stock VALUES ('3DSNG', 3, 1)");
-echo "<p>Se ha insertado $insertar registro.</p>";
+if ($ok) {
+    $bd->commit(); // Si todo fue bien confirma los cambios
+    echo "<p>Un producto 3DSNG se ha movido de tienda 1 a tienda 3</p>";
+} else {
+    $bd->rollback(); // y si no, los revierte
+    echo "<p>Rollback ejecutado</p>";
+}

@@ -33,17 +33,27 @@
         <p><input type="submit" name="submit"></p>
     </form>
     <?php
-    if (!empty($_POST)) {
-        $nombre = $_POST['nombre'];
-        $email = $_POST['email'];
-        $tipomensaje = $_POST['tipomensaje'];
-        $mensaje = $_POST['mensaje'];
+    if (isset($_POST['submit'])) {
+        foreach ($_POST as $key => $value) {
+            if (empty($value)) {
+                exit("El campo $key está vacío");
+            }
+        }
 
         echo "<pre>";
         print_r($_POST);
         echo "</pre>";
 
-        mail($email, $tipomensaje, $mensaje);
+        $nombre = $_POST['nombre'];
+        $email = $_POST['email'];
+        $tipomensaje = $_POST['tipomensaje'];
+        $mensaje = $_POST['mensaje'];
+
+        if (mail($email, $tipomensaje, $mensaje)) {
+            echo "Correo enviado correctamente";
+        } else {
+            echo "Error al enviar el correo";
+        }
     }
     ?>
 </body>
