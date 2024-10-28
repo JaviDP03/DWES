@@ -40,17 +40,20 @@
             }
         }
 
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
-
+        $email = $_POST["email"];
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            exit("El email no tiene un formato válido");
+        }
+        
         $nombre = $_POST['nombre'];
-        $email = $_POST['email'];
         $tipomensaje = $_POST['tipomensaje'];
         $mensaje = $_POST['mensaje'];
+        $direccionIP = $_SERVER['REMOTE_ADDR'];
 
+        // Correo enviado por el servidor de correo local Mercury que trae WAMPP incorporado.
         if (mail($email, $tipomensaje, $mensaje)) {
-            echo "Correo enviado correctamente";
+            echo "Correo enviado correctamente<br>";
+            echo "Enviado desde: $direccionIP";
         } else {
             echo "Error al enviar el correo";
         }
