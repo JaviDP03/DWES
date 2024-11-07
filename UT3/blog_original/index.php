@@ -8,10 +8,8 @@ theHeader();
     <?php
     /* OBTENER DE LA BD LA LISTA DE NOTICIAS Y PASARSELAS A bloqueNoticia. OBTENER
     TAMBIÉN TOTAL DE COMENTARIOS */
-    $consulta = $bd->query("SELECT * FROM noticias");
-
-    for ($i = 0; $i < $consulta->rowCount(); $i++) { // BUCLE DE MUESTRA
-        $noticia = $consulta->fetch();
+    for ($i = 0; $i < 3; $i++) { // BUCLE DE MUESTRA
+        $noticia = "";
         bloqueNoticia($noticia);
     }
     ?>
