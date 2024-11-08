@@ -17,8 +17,8 @@ function bloqueNoticia($noticia)
 function bloqueComentario($comentario)
 { // REEMPLAZAR TEXTO EN MAYUSCULAS (AUTOR,FECHA,TEXTO)
     echo "<li class='bloqueComentario'>";
-    echo "<p><strong>AUTOR</strong> en FECHA:";
-    echo "<p>TEXTO</p>";
+    echo "<p><strong>{$comentario['autor']}</strong> en {$comentario['fecha']}:";
+    echo "<p>{$comentario['texto']}</p>";
     echo "</li>";
 }
 function theHeader($titulo = null)
@@ -51,7 +51,7 @@ function theHeader($titulo = null)
         </div>
         <?php // REEMPLAZAR TEXTO EN MAYUSCULAS (TU_NOMBRE) 
         ?>
-        <footer>Copyright © <?php date("Y") ?><span>TU_NOMBRE<a href='index.php'>The Hack
+        <footer>Copyright © <?php date("Y") ?><span>Javier Duarte Pérez <a href='index.php'>The Hack
                     Blog</a></span></footer>
     </body>
 
