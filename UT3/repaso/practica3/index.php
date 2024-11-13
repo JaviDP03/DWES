@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <!-- index.php -->
     <?php
     try {
         $bd = new PDO('mysql:host=localhost;dbname=fpAndaluza', 'root', '');
@@ -20,7 +21,7 @@
     $provincias = $bd->query("SELECT * FROM provincias");
     ?>
     <h2>Solicitud de plaza</h2>
-    <form action="registro.php" method="POST">
+    <form method="POST">
         <fieldset>
             <legend>Datos para el registro</legend>
             <p>
@@ -50,8 +51,43 @@
             </p>
         </fieldset>
         <br>
-        <input type="submit">
+        <input type="submit" name="submit">
     </form>
+    <br>
+
+    <!-- registro.php -->
+    <?php
+    if (!isset($_POST['submit'])) {
+        exit();
+    }
+
+    $relleno = !empty($_POST['dni']) && !empty($_POST['ciclo']) && !empty($_POST['provincias']);
+  
+    if (!$relleno) {
+        echo "No se han rellenado todos los campos";
+        exit();
+    }
+
+    $dni = $_POST['dni'];
+    $ciclo = $_POST['ciclo'];
+    $provincias = $_POST['provincias'];
+    $hora = date("Y-m-d H:i:s");
+
+    try {
+        for ($i = 0; $i < count($provincias); $i++) {
+            $bd->exec("INSERT INTO solicitudesPlaza VALUES ('$dni', '$ciclo', '{$provincias[$i]}', '$hora')");
+
+            echo "<p>";
+            echo "INSERT INTO solicitudesPlaza VALUES ('$dni', '$ciclo', '{$provincias[$i]}', '$hora')<br>";
+            echo "Insertado correctamente";
+            echo "</p>";
+        }
+
+        echo "Se han insertado $i registros";
+    } catch (PDOException $p) {
+        echo "Ha habido una excepción:<br>" . $p->getMessage();
+    }
+    ?>
 </body>
 
 </html>

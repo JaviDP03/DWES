@@ -9,6 +9,13 @@
 
 <body>
     <?php
+    $relleno = !empty($_POST['dni']) && !empty($_POST['ciclo']) && !empty($_POST['provincias']);
+
+    if (!$relleno) {
+        echo "No se han rellenado todos los campos";
+        exit();
+    }
+    
     try {
         $bd = new PDO('mysql:host=localhost;dbname=fpAndaluza', 'root', '');
     } catch (PDOException $p) {
@@ -19,16 +26,24 @@
     $dni = $_POST['dni'];
     $ciclo = $_POST['ciclo'];
     $provincias = $_POST['provincias'];
-    $hora = date("Y-m-d h:i:s");
+    $hora = date("Y-m-d H:i:s");
 
     try {
-        for ($i=0; $i < count($provincias); $i++) { 
+        for ($i = 0; $i < count($provincias); $i++) {
             $bd->exec("INSERT INTO solicitudesPlaza VALUES ('$dni', '$ciclo', '{$provincias[$i]}', '$hora')");
+
+            echo "<p>";
+            echo "INSERT INTO solicitudesPlaza VALUES ('$dni', '$ciclo', '{$provincias[$i]}', '$hora')<br>";
+            echo "Insertado correctamente";
+            echo "</p>";
         }
+
+        echo "Se han insertado $i registros";
     } catch (PDOException $p) {
-        echo "Ha habido una excepción:<br>". $p->getMessage();
+        echo "Ha habido una excepción:<br>" . $p->getMessage();
     }
     ?>
+    <p><a href="index.php"><-- Volver</a></p>
 </body>
 
 </html>
