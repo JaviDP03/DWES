@@ -40,7 +40,7 @@
     }
 
     $consultaPlazas = $bd->query("SELECT s.dni AS dni, DATE_FORMAT(s.horaSolicitud, '%d-%m-%Y') AS fecha, s.codCiclo AS codCiclo, c.nomCiclo AS nomCiclo, p.nomProvincia AS nomProvincia
-    FROM solicitudesplaza s
+    FROM solicitudesPlaza s
     INNER JOIN ciclos c ON s.codCiclo = c.codCiclo
     INNER JOIN provincias p ON s.codProvincia = p.codProvincia");
     ?>
@@ -73,14 +73,14 @@
         }
         ?>
     </table>
-    <hr>
+    <br><hr>
 
     <h2>Tabla completa</h2>
     <?php
     $consultaPlazas2 = $bd->query("SELECT d.dni AS dni, DATE_FORMAT(s.horaSolicitud, '%d-%m-%Y') AS fecha, c.codCiclo AS codCiclo, c.nomCiclo AS nomCiclo, p.nomProvincia AS nomProvincia
-    FROM (SELECT DISTINCT dni FROM solicitudesplaza) d
+    FROM (SELECT DISTINCT dni FROM solicitudesPlaza) d
     CROSS JOIN ciclos c
-    LEFT JOIN solicitudesplaza s ON d.dni = s.dni AND c.codCiclo = s.codCiclo
+    LEFT JOIN solicitudesPlaza s ON d.dni = s.dni AND c.codCiclo = s.codCiclo
     LEFT JOIN provincias p ON s.codProvincia = p.codProvincia");
     ?>
     <table>

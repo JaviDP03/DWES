@@ -40,7 +40,7 @@
     }
 
     $consultaPlazas = $bd->query("SELECT s.dni AS dni, DATE_FORMAT(s.horaSolicitud, '%d-%m-%Y') AS fecha, s.codCiclo AS codCiclo, c.nomCiclo AS nomCiclo,
-    p.nomProvincia AS nomProvincia FROM solicitudesplaza s INNER JOIN ciclos c ON s.codCiclo = c.codCiclo INNER JOIN provincias p ON s.codProvincia = p.codProvincia");
+    p.nomProvincia AS nomProvincia FROM solicitudesPlaza s INNER JOIN ciclos c ON s.codCiclo = c.codCiclo INNER JOIN provincias p ON s.codProvincia = p.codProvincia");
     ?>
 
     <h2>Tabla de plazas de la FP Andaluza</h2>

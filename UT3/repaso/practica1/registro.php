@@ -29,8 +29,14 @@
     $hora = date("Y-m-d H:i:s");
 
     try {
+        $sentencia = $bd->prepare("INSERT INTO solicitudesPlaza VALUES (?, ?, ?, ?)");
+        $sentencia->bindParam(1, $dni);
+        $sentencia->bindParam(2, $ciclo);
+        $sentencia->bindParam(4, $hora);
+
         for ($i = 0; $i < count($provincias); $i++) {
-            $bd->exec("INSERT INTO solicitudesPlaza VALUES ('$dni', '$ciclo', '{$provincias[$i]}', '$hora')");
+            $sentencia->bindParam(3, $provincias[$i]);
+            $sentencia->execute();
 
             echo "<p>";
             echo "INSERT INTO solicitudesPlaza VALUES ('$dni', '$ciclo', '{$provincias[$i]}', '$hora')<br>";

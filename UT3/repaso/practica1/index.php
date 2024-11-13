@@ -28,10 +28,10 @@
                 <input type="text" id="dni" name="dni" value="17482156V">
             </p>
             <p>
-                Ciclo:
-                <select name="ciclo">
+                Ciclo:<br>
+                <select name="ciclo" size="5">
                     <?php
-                    for ($i = 0; $i < 5; $i++) {
+                    for ($i = 0; $i < $ciclos->rowCount(); $i++) {
                         $ciclo = $ciclos->fetch();
                         $selected = $ciclo['codCiclo'] == 'DAW' ? "selected=\"selected\"" : "";
                         echo "<option value=\"{$ciclo['codCiclo']}\" $selected>{$ciclo['nomCiclo']}</option>\n";
