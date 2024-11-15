@@ -1,0 +1,101 @@
+body {
+    position: static;
+    width: auto;
+    margin: auto;
+    min-width: 1008px;
+    background: #b3b3b0;
+}
+
+#wrapper {
+    font-family: Verdana, Arial, sans-serif;
+    color: #333;
+    font-size: 13px;
+    width: 1008px;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+    box-sizing: border-box;
+}
+
+.header {
+    background: #191919;
+    border-top: 1px solid #444;
+    color: #fff;
+    font: 10pt Verdana, Arial, sans-serif;
+    padding: 15px;
+}
+
+.logo {
+    background-color: #F5C518;
+    border-color: #F5C518;
+    padding: 5px 10px 5px 10px;
+    display: inline-block;
+    margin-left: 0px;
+    font: 36px Arial, sans-serif;
+    color: #000;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.opiniones {
+    list-style: none;
+}
+
+.opinion {
+    margin-bottom: 5px;
+}
+
+.opinion .nombre {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.opinion .nota {
+    display: inline-block;
+    border-radius: 5px;
+    padding: 1px;
+    color: black;
+    font-weight: bold;
+}
+
+.opinion .fecha {
+    font-style: italic;
+    color: #333;
+    font-size: smaller;
+}
+
+.nota.peli_mala {
+    background-color: red;
+}
+
+.nota.peli_regular {
+    background-color: yellow;
+}
+
+.nota.peli_buena {
+    background-color: green;
+}
+
+.nota.peli_muy_buena {
+    background-color: greenyellow;
+}
+
+.superior {
+    background-color: #333;
+    padding: 5px 15px;
+    color: #fff;
+}
+
+.superior h1 {
+    margin-top: 0px;
+}
+
+.poster {
+    margin: auto;
+    display: block;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+}
+
+.inferior {
+    padding: 15px;
+}
