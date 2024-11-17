@@ -22,26 +22,30 @@
             <?php
             $bd = conexionBD();
             $opiniones = consultarOpiniones($bd);
+            if (!$opiniones) {
+                echo "<p>Sin opiniones</p>";
+            } else {
             ?>
-            <ul class="opiniones">
-                <?php
-                for ($i = 0; $i < count($opiniones); $i++) {
-                    echo "<li class=\"opinion\">";
-                    echo "<span class=\"nota CLASENOTA\">{$opiniones[$i]['nota']}</span>";
-                    echo "<span class=\"nombre\">{$opiniones[$i]['usuario']}</span>";
-                    echo "{$opiniones[$i]['texto']}";
-                    echo "<span class=\"fecha\">{$opiniones[$i]['fecha']}</span>";
-                    echo "</li>";
-                }
-                ?>
-            </ul>
+                <ul class="opiniones">
+                    <?php
+                    for ($i = 0; $i < count($opiniones); $i++) {
+                        echo "<li class=\"opinion\">";
+                        echo "<span class=\"nota " . claseNota($opiniones[$i]['nota']) . "\">{$opiniones[$i]['nota']}</span>";
+                        echo "<span class=\"nombre\">{$opiniones[$i]['usuario']}</span>";
+                        echo "{$opiniones[$i]['texto']}";
+                        echo "<span class=\"fecha\">{$opiniones[$i]['fecha']}</span>";
+                        echo "</li>";
+                    }
+                    ?>
+                </ul>
+            <?php } ?>
             <h3>Añade tu opinión</h3>
             <form method="POST">
                 <p><input type="text" name="usuario" placeholder="Nombre" /></p>
                 <p>Nota:
                     <select name="nota">
                         <?php
-                        for ($i=0; $i <= 10; $i++) {
+                        for ($i = 0; $i <= 10; $i++) {
                             echo "<option value=\"$i\">$i</option>";
                         }
                         ?>
@@ -50,6 +54,7 @@
                 <p><textarea name="texto" placeholder="Escribe tu opinión"></textarea></p>
                 <p><input type="submit" value="Enviar" /></p>
             </form>
+            <?php insertarOpinion($bd); ?>
         </div>
     </div>
 </body>
