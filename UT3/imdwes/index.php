@@ -7,6 +7,15 @@
 </head>
 
 <body>
+    <?php
+    // Conexión a la base de datos
+    try {
+        $bd = conexionBD();
+    } catch (PDOException $e) {
+        echo "<p style=\"color: red\">Error: " . $e->getMessage() . "</p>";
+        exit();
+    }
+    ?>
     <div id="wrapper">
         <div class="header"><span class="logo">IMDwes</span></div>
         <div class="superior">
@@ -20,7 +29,14 @@
                 del mundo de la computación y la informática.</p>
             <h2>Opiniones</h2>
             <?php
-            $bd = conexionBD();
+            // Si se ha enviado el formulario, se inserta la opinión en la base de datos y se redirige a la misma página para limpiar el formulario
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                insertarOpinion($bd);
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit();
+            }
+
+            // Imprimir los datos
             $opiniones = consultarOpiniones($bd);
             if (!$opiniones) {
                 echo "<p>Sin opiniones</p>";
@@ -30,9 +46,9 @@
                     <?php
                     for ($i = 0; $i < count($opiniones); $i++) {
                         echo "<li class=\"opinion\">";
-                        echo "<span class=\"nota " . claseNota($opiniones[$i]['nota']) . "\">{$opiniones[$i]['nota']}</span>";
-                        echo "<span class=\"nombre\">{$opiniones[$i]['usuario']}</span>";
-                        echo "{$opiniones[$i]['texto']}";
+                        echo "<span class=\"nota " . claseNota($opiniones[$i]['nota']) . "\">{$opiniones[$i]['nota']}</span>&nbsp;";
+                        echo "<span class=\"nombre\">{$opiniones[$i]['usuario']}</span>&nbsp;";
+                        echo "{$opiniones[$i]['texto']}&nbsp;";
                         echo "<span class=\"fecha\">{$opiniones[$i]['fecha']}</span>";
                         echo "</li>";
                     }
@@ -45,6 +61,7 @@
                 <p>Nota:
                     <select name="nota">
                         <?php
+                        // Nota 0-10
                         for ($i = 0; $i <= 10; $i++) {
                             echo "<option value=\"$i\">$i</option>";
                         }
@@ -54,7 +71,6 @@
                 <p><textarea name="texto" placeholder="Escribe tu opinión"></textarea></p>
                 <p><input type="submit" value="Enviar" /></p>
             </form>
-            <?php insertarOpinion($bd); ?>
         </div>
     </div>
 </body>

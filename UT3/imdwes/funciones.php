@@ -2,42 +2,44 @@
 // Dentro de la función que comprueba si el nombre de usuario está permitido se ha de usar la siguiente lista negra:
 $listaNegra = array("Manolo29", "LuciaUchiha", "Ecijano42", "usuario", "root");
 
+// Función que devuelve una conexión a la base de datos
 function conexionBD()
 {
     return new PDO('mysql:host=localhost;dbname=IMDwes', 'root', '');
 }
 
+// Función que devuelve las opiniones almacenadas en la base de datos
 function consultarOpiniones($bd)
 {
     $consulta = $bd->query("SELECT * FROM opiniones");
     return $consulta->fetchAll();
 }
 
+// Función que inserta una opinión en la base de datos
 function insertarOpinion($bd)
 {
-    if (!empty($_POST['usuario']) && !empty($_POST['nota']) && !empty($_POST['texto'])) {
+    if (!empty($_POST['usuario']) && isset($_POST['nota']) && !empty($_POST['texto'])) { // Se comprueba que los campos no estén vacíos
         $usuario = $_POST['usuario'];
         $nota = $_POST['nota'];
         $texto = $_POST['texto'];
         $fecha = date('Y-m-d H:i:s');
 
-        $bd->beginTransaction();
+        $bd->beginTransaction(); // Se inicia una transacción
 
-        $opinion = $bd->exec("INSERT INTO opiniones (usuario, nota, texto, fecha) VALUES ('$usuario', '$nota', '$texto', '$fecha')");
+        $opinion = $bd->exec("INSERT INTO opiniones (usuario, nota, texto, fecha) VALUES ('$usuario', '$nota', '$texto', '$fecha')"); // Se insertan los datos
 
+        // Si hay algún fallo o el usuario está en la lista negra, se cancela la transacción
         if (!$opinion) {
             $bd->rollBack();
-            echo "<p>Error al insertar la opinión</p>";
         } else if (filtro($usuario)) {
             $bd->rollBack();
-            echo "<p>Usuario vetado</p>";
         } else {
             $bd->commit();
-            echo "<p>Opinión insertada</p>";
         }
     }
 }
 
+// Función que comprueba en una lista negra el nombre de usuario introducido
 function filtro($usuario)
 {
     global $listaNegra;
@@ -46,9 +48,11 @@ function filtro($usuario)
             return true;
         }
     }
+
     return false;
 }
 
+// Función que devuelve la clase CSS correspondiente a la nota
 function claseNota($nota)
 {
     switch ($nota) {

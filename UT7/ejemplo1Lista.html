@@ -1,0 +1,33 @@
+<!-- ejemplo1Lista.html -->
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <script>
+        function mostrarSugerencias(str) {
+            if (str.length == 0) {
+                document.getElementById("txtSugerencia").innerHTML = "";
+                return;
+            } else {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("txtSugerencia").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "ejemplo1Lista.php?q=" + str, true);
+                xmlhttp.send();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <p><strong>Empiece a escribir un nombre:</strong></p>
+    <form>
+        Nombre: <input type="text" onkeyup="mostrarSugerencias(this.value)">
+    </form>
+    <p>Sugerencias: <ul id="txtSugerencia"></ul></p>
+</body>
+
+</html>
