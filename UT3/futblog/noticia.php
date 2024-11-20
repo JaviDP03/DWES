@@ -8,11 +8,29 @@ if (isset($_POST['btnComentario']) && !empty($_POST['txtAutor']) && !empty($_POS
     $fecha = date("Y-m-d H:i:s");
     $id_noticia = $_POST['hidNoticia'];
 
+    $bd->beginTransaction();
+    $existeComentario = false;
+
+    $verificarComentarios = $bd->query("SELECT * FROM comentarios WHERE id_noticia = $id_noticia");
+    while ($unComentario = $verificarComentarios->fetch()) {
+        if ($unComentario['autor'] == $autor && $unComentario['texto'] == $texto) {
+            $existeComentario = true;
+            break;
+        }
+    }
+
     $bd->exec("INSERT INTO comentarios (autor, texto, fecha, id_noticia) VALUES ('$autor', '$texto', '$fecha', $id_noticia)");
+
+    if ($existeComentario) {
+        $bd->rollBack();
+    } else {
+        $bd->commit();
+    }
 }
 // CONSULTAR NOTICIA
 $id_noticia = isset($_GET['id']) ? $_GET['id'] : 0;
-$consulta_noticia = $bd->query("SELECT * FROM noticias WHERE id_noticia = $id_noticia");
+$consulta_noticia = $bd->prepare("SELECT * FROM noticias WHERE id_noticia = ?");
+$consulta_noticia->execute([$id_noticia]);
 if (!$consulta_noticia->rowCount()) { /* COMPROBAR SI NO HA HABIDO RESULTADOS. SI ES ASÍ, LANZAMOS ERROR 404*/
     header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found", true, 404);
     include 'error404.php';
@@ -31,7 +49,9 @@ theHeader($noticia['titular']);
 <h2>Comentarios</h2>
 <?php
 // OBTENER COMENTARIOS DE LA NOTICIA
-$comentarios = $bd->query("SELECT * FROM comentarios WHERE id_noticia = $id_noticia");
+$comentarios = $bd->prepare("SELECT * FROM comentarios WHERE id_noticia = ?");
+$comentarios->bindParam(1, $id_noticia);
+$comentarios->execute();
 if ($comentarios->rowCount()) { // SI HAY COMENTARIOS
     echo '<ul>';
     for ($i = 0; $i < $comentarios->rowCount(); $i++) { // BUCLE DE MUESTRA
