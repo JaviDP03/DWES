@@ -17,8 +17,6 @@ DROP DATABASE IF EXISTS futblog;
 CREATE DATABASE futblog;
 USE futblog;
 --
--- --------------------------------------------------------
---
 -- Estructura de tabla para la tabla `comentarios`
 --
 CREATE TABLE `comentarios` (
@@ -34,7 +32,7 @@ CREATE TABLE `comentarios` (
 INSERT INTO `comentarios` (`id_comentario`, `autor`, `texto`, `fecha`, `id_noticia`) VALUES
 (1, 'Pepe', '¡Qué golazo de Messi!', '2018-10-01 09:35:33', 3),
 (2, 'Ana', 'Increíble partido, me encantó.', '2018-10-10 10:38:35', 3);
--- --------------------------------------------------------
+--
 --
 -- Estructura de tabla para la tabla `noticias`
 --
@@ -79,7 +77,7 @@ MODIFY `id_comentario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=
 --
 ALTER TABLE `noticias`
 MODIFY `id_noticia` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
----- Restricciones para tablas volcadas
+-- Restricciones para tablas volcadas
 --
 --
 -- Filtros para la tabla `comentarios`

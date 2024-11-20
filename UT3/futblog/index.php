@@ -8,7 +8,8 @@ theHeader();
     <?php
     /* OBTENER DE LA BD LA LISTA DE NOTICIAS Y PASARSELAS A bloqueNoticia. OBTENER
     TAMBIÉN TOTAL DE COMENTARIOS */
-    $consulta = $bd->query("SELECT * FROM noticias");
+    $consulta = $bd->query("SELECT n.*, COUNT(c.id_noticia) AS numerocomentarios FROM noticias n
+    LEFT JOIN comentarios c ON n.id_noticia = c.id_noticia GROUP BY n.id_noticia");
 
     for ($i = 0; $i < $consulta->rowCount(); $i++) { // BUCLE DE MUESTRA
         $noticia = $consulta->fetch();
