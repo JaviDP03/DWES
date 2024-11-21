@@ -1,27 +1,31 @@
 <!-- ejemplo3.html -->
 <html lang="es">
+
 <head>
     <meta charset="utf-8">
     <script>
-    function comprobar(str) {
-        if (str.length == 0) {
-            document.getElementById("error").innerHTML = "";
-            return;
-        } else {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    if (this.responseText != "OK") {
+        function comprobar(str) {
+            if (str.length == 0) {
+                document.getElementById("error").innerHTML = "";
+                return;
+            } else {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
                         document.getElementById("error").innerHTML = this.responseText;
-                    } else {
-                        document.getElementById("error").innerHTML = "";
+
+                        if (this.responseText != "OK") {
+                            document.getElementById("botonSubmit").disabled = true;
+                        } else {
+                            document.getElementById("botonSubmit").disabled = false;
+                            // document.getElementById("error").innerHTML = "";
+                        }
                     }
-                }
-            };
-            xmlhttp.open("GET", "ejemplo3.php?q=" + str, true);
-            xmlhttp.send();
+                };
+                xmlhttp.open("GET", "ejemplo3.php?q=" + str, true);
+                xmlhttp.send();
+            }
         }
-    }
     </script>
     <style>
         #error {
@@ -30,10 +34,13 @@
         }
     </style>
 </head>
+
 <body>
     <p><strong>Escriba un correo electrónico:</strong></p>
     <form>
-    Correo: <input type="text" onkeyup="comprobar(this.value)"> <span id="error"></span>
+        Correo: <input type="email" onkeyup="comprobar(this.value)"> <span id="error"></span>
+        <input type="submit" id="botonSubmit" disabled>
     </form>
 </body>
+
 </html>
