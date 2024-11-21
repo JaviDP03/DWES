@@ -26,7 +26,7 @@
             <legend>Datos para el registro</legend>
             <p>
                 <label for="dni">DNI: </label>
-                <input type="text" id="dni" name="dni" value="17482156V">
+                <input type="text" id="dni" name="dni" value="51162580T">
             </p>
             <p>
                 Ciclo:<br>
