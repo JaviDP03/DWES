@@ -10,19 +10,24 @@
             xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) { // Si la petición terminó y todo ha ido bien...
-                    document.getElementById("divResultado").innerHTML = xmlhttp.responseText;
+                    document.getElementById("parametros").innerHTML = "num1 = " + num1 + " | num2 = " + num2;
+                    document.getElementById("resultado").innerHTML = xmlhttp.responseText;
                 }
             }
-            xmlhttp.open("GET", "suma.php?numero1=" + num1 + "&numero2=" + num2, true);
+            xmlhttp.open("POST", "suma.php?numero1=" + num1 + "&numero2=" + num2, true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlhttp.send();
         }
     </script>
 </head>
 
 <body>
-    <p>Número 1: <input id="num1"></p>
-    <p>Número 2: <input id="num2"></p>
-    <p>Resultado: <input id="resultado"></p>
+    <p>Número 1: <input id="num1" onkeyup="sumaNumeros(this.value, this.value)"></p>
+    <p>Número 2: <input id="num2" onkeyup="sumaNumeros(this.value, this.value)"></p>
+    <p>Parámetros de la llamada: <span id="parametros"></span></p>
+    <p>Resultado:
+    <div id="resultado"></div>
+    </p>
 </body>
 
 </html>
