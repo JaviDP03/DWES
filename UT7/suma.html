@@ -22,8 +22,8 @@
 </head>
 
 <body>
-    <p>Número 1: <input id="num1" onkeyup="sumaNumeros(this.value, this.value)"></p>
-    <p>Número 2: <input id="num2" onkeyup="sumaNumeros(this.value, this.value)"></p>
+    <p>Número 1: <input id="num1" onkeyup="sumaNumeros(this.value, document.querySelector('#num2').value)"></p>
+    <p>Número 2: <input id="num2" onkeyup="sumaNumeros(document.querySelector('#num1').value, this.value)"></p>
     <p>Parámetros de la llamada: <span id="parametros"></span></p>
     <p>Resultado:
     <div id="resultado"></div>

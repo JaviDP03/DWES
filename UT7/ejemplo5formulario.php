@@ -6,7 +6,7 @@ $bd = new PDO('mysql:host=localhost;dbname=tienda;charset=utf8', 'dwes', 'abc123
 
 <head>
     <meta charset="utf8" />
-    <script src="ejemplo4tienda.js"></script>
+    <script src="ejemplo5.js"></script>
 </head>
 
 <body>

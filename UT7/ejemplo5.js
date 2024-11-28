@@ -1,4 +1,4 @@
-// ejemplo4.js
+// ejemplo5.js
 function mostrarProducto(str) {
     if (str.length == 0) {
         document.getElementById("spnNombre").innerHTML = "";
@@ -20,7 +20,7 @@ function mostrarProducto(str) {
                 document.getElementById("ficha").style.display = "block";
             }
         };
-        xmlhttp.open("GET", "ejemplo4servidortienda.php?q=" + str, true);
+        xmlhttp.open("GET", "ejemplo5servidor.php?q=" + str, true);
         xmlhttp.send();
     }
 }
