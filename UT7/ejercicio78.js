@@ -6,20 +6,14 @@ function mostrarProducto(str) {
         document.getElementById("ficha").style.display = "none";
         return;
     } else {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                var xmlDoc = this.responseXML;
-                document.getElementById("spnNombre").innerHTML =
-                    xmlDoc.getElementsByTagName("nombre")[0].childNodes[0].nodeValue;
-                document.getElementById("spnDescripcion").innerHTML =
-                    xmlDoc.getElementsByTagName("descripcion")[0].childNodes[0].nodeValue;
-                document.getElementById("spnPrecio").innerHTML =
-                    xmlDoc.getElementsByTagName("precio")[0].childNodes[0].nodeValue;
-                document.getElementById("ficha").style.display = "block";
-            }
-        };
-        xmlhttp.open("GET", "ejercicio78.php?q=" + str, true);
-        xmlhttp.send();
+        fetch('ejercicio78servidor.php?q=' + str).then(function (response) {
+            // Convertimos a JSON
+            return response.json();
+        }).then(function (producto) {
+            document.getElementById("spnNombre").innerHTML = producto.nombre_corto;
+            document.getElementById("spnDescripcion").innerHTML = producto.descripcion;
+            document.getElementById("spnPrecio").innerHTML = producto.PVP;
+            document.getElementById("ficha").style.display = "block";
+        });
     }
 }
