@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Versión XML</title>
+    <script src="ejerciciofp.js"></script>
     <?php
     $bd = new PDO('mysql:host=localhost;dbname=fpandaluza;charset=utf8', 'dwes', 'abc123');
     ?>
@@ -24,7 +25,9 @@
             ?>
         </select>
     </form>
-    <div id="contHoras"></div>
+    <div>
+        <p id="horas"></p>
+    </div>
 </body>
 
 </html>
