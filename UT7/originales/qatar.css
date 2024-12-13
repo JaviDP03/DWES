@@ -1,0 +1,91 @@
+body {
+    font: 76% arial, sans-serif;
+    background-image: url(images/qatar2022.png);
+    width: 800px;
+}
+
+p {
+    margin: 0 10px 10px;
+}
+
+header {
+    background-color: #F3F2ED;
+    text-align: center;
+}
+
+.titulo {
+    background-color: #F3F2ED;
+    text-align: center;
+    color: rgba(27, 21, 115, 0.766)
+}
+
+header h2 {
+    height: 80px;
+    line-height: 80px;
+    margin: 0;
+    padding-left: 10px;
+}
+
+footer {
+    background: #BFBD93;
+    clear: left;
+    width: 100%;
+    text-align: right;
+}
+
+footer p {
+    margin: 0;
+    padding: 5px 10px;
+}
+
+table {
+    float: left;
+    width: 400px;
+    border: 1px solid;
+}
+
+#cuerpo {
+    float: left;
+    width: 45%;
+}
+
+h1 {
+    color: #c00;
+    font-family: sans-serif;
+    font-size: 2em;
+    margin-bottom: 0;
+}
+
+table {
+    font-family: sans-serif;
+}
+
+th,
+td {
+    padding: .25em .5em;
+    text-align: left;
+}
+
+td,
+ol {
+    background-color: #eee;
+}
+
+th {
+    background-color: #009;
+    color: #fff;
+}
+
+.zigzag {
+    border-collapse: separate;
+    border-spacing: .25em 1em;
+}
+
+tbody tr:nth-child(odd) {
+    transform: rotate(2deg);
+}
+
+thead tr,
+tbody tr:nth-child(even) {
+    transform: rotate(-2deg);
+}
