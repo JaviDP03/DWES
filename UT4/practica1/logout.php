@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php
+if (!isset($_COOKIE["login"])) {
+    header("Location: login.php");
+} else {
+    setcookie("login", "", time() - 3600);
+}
+?>
+
 <html lang="es">
 
 <head>
@@ -8,13 +16,6 @@
 </head>
 
 <body>
-    <?php
-    if (!isset($_COOKIE["login"])) {
-        header("Location: login.php");
-    } else {
-        setcookie("login", time() - 3600);
-    }
-    ?>
     <h4>Se ha cerrado la sesión correctamente</h4>
     <p><a href="login.php">Iniciar sesión</a></p>
 </body>

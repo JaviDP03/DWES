@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+if (!isset($_COOKIE['login'])) {
+    header("Location: login.php");
+}
+?>
+
 <html lang="es">
 
 <head>
@@ -8,11 +14,6 @@
 </head>
 
 <body>
-    <?php
-    if (!isset($_COOKIE['login'])) {
-        header("Location: login.php");
-    }
-    ?>
     <h1>Zona Restringida</h1>
     <p>Bienvenido, <?= $_COOKIE['login']; ?></p>
     <p><a href="logout.php">Cerrar sesión</a></p>
