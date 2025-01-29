@@ -8,23 +8,23 @@ if (isset($_POST['btnComentario']) && !empty($_POST['txtAutor']) && !empty($_POS
     $fecha = date("Y-m-d H:i:s");
     $id_noticia = $_POST['hidNoticia'];
 
+    // La función de esta transacción es evitar que se inserten comentarios duplicados
     $bd->beginTransaction();
     $existeComentario = false;
 
-    $verificarComentarios = $bd->query("SELECT * FROM comentarios WHERE id_noticia = $id_noticia");
-    while ($unComentario = $verificarComentarios->fetch()) {
-        if ($unComentario['autor'] == $autor && $unComentario['texto'] == $texto) {
+    $verificarComentarios = $bd->query("SELECT autor, texto FROM comentarios WHERE autor = '$autor' AND texto = '$texto'");
+        if ($verificarComentarios->rowCount()) {
             $existeComentario = true;
-            break;
         }
-    }
 
     $bd->exec("INSERT INTO comentarios (autor, texto, fecha, id_noticia) VALUES ('$autor', '$texto', '$fecha', $id_noticia)");
 
     if ($existeComentario) {
         $bd->rollBack();
+        $respuesta = "<p class=\"alerta\">El comentario ya existe</p>";
     } else {
         $bd->commit();
+        $respuesta = null;
     }
 }
 // CONSULTAR NOTICIA
@@ -71,6 +71,11 @@ if ($comentarios->rowCount()) { // SI HAY COMENTARIOS
     <p><textarea placeholder="Escribe tu comentario"
             name="txtComentario"></textarea></p>
     <p><input type="submit" name="btnComentario" value="Comentar" /></p>
+    <?php
+    if (isset($respuesta)) {
+        echo $respuesta;
+    }
+    ?>
 </form>
 <?php
 theFooter();

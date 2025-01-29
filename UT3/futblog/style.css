@@ -115,3 +115,10 @@ footer span {
 #frmComentario textarea {
     width: 100%;
 }
+
+.alerta {
+    background-color: #FF0000;
+    color: #FFF;
+    padding: 5px;
+    text-align: center;
+}
