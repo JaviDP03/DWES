@@ -7,6 +7,10 @@
     padding: 4px 20px;
 }
 
+main {
+    height: 70vh;
+}
+
 body {
     background-color: #333;
     margin: 0px;
@@ -23,11 +27,62 @@ header {
     padding: 2px 10px;
     border-bottom: 5px solid #CC00FF;
     text-align: center;
+    position: relative;
 }
 
 header h1 {
     margin: 0px;
     font-size: 40px;
+    display: inline-block;
+}
+
+header .menu {
+    display: inline-flex;
+    align-items: center;
+}
+
+header .user-actions {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+}
+
+header .boton-login {
+    background-color: #CC00FF;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3%;
+    text-align: center;
+    margin-left: 10px; /* Add some space between username and button */
+}
+
+header .boton-login:hover {
+    background-color: #AA00CC;
+}
+
+header .boton-login a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+}
+
+header #usuario {
+    color: white;
+    font-weight: bold;
+}
+
+header .login {
+    display: inline-flex;
+    position: absolute;
+    top: 20%;
+    right: 1%;
+    transform: translateY(-50%);
 }
 
 h1,

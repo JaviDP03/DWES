@@ -3,7 +3,11 @@ require_once "funciones.php";
 require_once "bd.php";
 if (isset($_POST['btnComentario']) && !empty($_POST['txtAutor']) && !empty($_POST['txtComentario'])) {
     // INSERTAR COMENTARIO
-    $autor = $_POST['txtAutor'];
+    if (!autenticado()) {
+        $autor = $_POST['txtAutor'] . " (anónimo)";
+    } else {
+        $autor = $_POST['txtAutor'];
+    }
     $texto = $_POST['txtComentario'];
     $fecha = date("Y-m-d H:i:s");
     $id_noticia = $_POST['hidNoticia'];
@@ -13,9 +17,9 @@ if (isset($_POST['btnComentario']) && !empty($_POST['txtAutor']) && !empty($_POS
     $existeComentario = false;
 
     $verificarComentarios = $bd->query("SELECT autor, texto FROM comentarios WHERE autor = '$autor' AND texto = '$texto'");
-        if ($verificarComentarios->rowCount()) {
-            $existeComentario = true;
-        }
+    if ($verificarComentarios->rowCount()) {
+        $existeComentario = true;
+    }
 
     $bd->exec("INSERT INTO comentarios (autor, texto, fecha, id_noticia) VALUES ('$autor', '$texto', '$fecha', $id_noticia)");
 
@@ -64,10 +68,9 @@ if ($comentarios->rowCount()) { // SI HAY COMENTARIOS
 }
 ?>
 <strong>Deja un comentario</strong>
-<form id="frmComentario" method="post" action="<?php echo $_SERVER['PHP_SELF'] .
-                                                    '?' . $_SERVER['QUERY_STRING'] ?>">
+<form id="frmComentario" method="post" action="<?php echo $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'] ?>">
     <input name="hidNoticia" type="hidden" value="<?php echo $id_noticia; ?>" />
-    <p><input name="txtAutor" type="text" placeholder="Nombre" /></p>
+    <p><input name="txtAutor" type="text" placeholder="Nombre" <?= autenticado() ? "value=\"{$_COOKIE['login']}\" readonly=\"readonly\"" : "" ?> /></p>
     <p><textarea placeholder="Escribe tu comentario"
             name="txtComentario"></textarea></p>
     <p><input type="submit" name="btnComentario" value="Comentar" /></p>
