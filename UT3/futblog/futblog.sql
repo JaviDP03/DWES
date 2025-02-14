@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `futblog`
 --
+DROP DATABASE IF EXISTS futblog;
+CREATE DATABASE futblog;
+USE futblog;
 
 -- --------------------------------------------------------
 

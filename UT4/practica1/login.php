@@ -4,20 +4,25 @@ if (isset($_COOKIE['login'])) {
     header("Location: zona_restringida.php");
 }
 
-$bd = new PDO('mysql:host=localhost;dbname=zonaR', 'dwes', 'abc123');
+try {
+$bd = new PDO('mysql:host=localhost;dbname=zonaR', 'root', '');
+} catch(PDOException $p) {
+    echo "Se ha lanzado la excepción " . $p->getMessage(). "<br/>";
+    exit();
+}
 
 if (isset($_POST['user']) && isset($_POST['password'])) {
     $user = $_POST['user'];
     $password = $_POST['password'];
 
-    $consulta = $bd->prepare('SELECT * FROM usuarios WHERE user = :user AND password = :password');
-    $consulta->execute(['user' => $user, 'password' => $password]);
+    $consulta = $bd->prepare("SELECT * FROM usuarios WHERE user = :user");
+    $consulta->execute(['user' => $user]);
 
     while ($fila = $consulta->fetch()) {
         $userBD = $fila['user'];
         $passwordBD = $fila['password'];
 
-        if ($user == $userBD && $password == $passwordBD) {
+        if ($user == $userBD && password_verify($password, $passwordBD)) {
             setcookie("login", $user, time() + 3600);
             header("Location: zona_restringida.php");
         }
