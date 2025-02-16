@@ -3,7 +3,7 @@
 if (!isset($_COOKIE["login"])) {
     header("Location: login.php");
 } else {
-    setcookie("login", "", time() - 3600);
+    setcookie("login");
 }
 ?>
 

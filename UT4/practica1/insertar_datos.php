@@ -2,7 +2,7 @@
 try {
     $bd = new PDO('mysql:host=localhost;dbname=zonaR;charset=utf8', 'root', '');
 } catch(PDOException $p) {
-    echo "Se ha lanzado la excepción " . $p->getMessage(). "<br/>";
+    echo "<p>Se ha lanzado la excepción " . $p->getMessage(). "</p>";
     exit();
 }
 
@@ -19,7 +19,9 @@ foreach ($datos as $linea) {
     try {
         $insercion->execute($linea);
     } catch (PDOException $p) {
-        echo "Ya se han insertado los datos";
+        echo "<p>Ya se han insertado los datos</p>";
         exit();
     }
 }
+
+echo "<p>Se han insertado los datos correctamente</p>";

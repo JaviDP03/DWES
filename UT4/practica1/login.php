@@ -7,7 +7,7 @@ if (isset($_COOKIE['login'])) {
 try {
 $bd = new PDO('mysql:host=localhost;dbname=zonaR', 'root', '');
 } catch(PDOException $p) {
-    echo "Se ha lanzado la excepción " . $p->getMessage(). "<br/>";
+    echo "<p>Se ha lanzado la excepción " . $p->getMessage(). "</p>";
     exit();
 }
 
