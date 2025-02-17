@@ -14,6 +14,7 @@ $bd = new PDO('mysql:host=localhost;dbname=zonaR', 'root', '');
 if (isset($_POST['user']) && isset($_POST['password'])) {
     $user = $_POST['user'];
     $password = $_POST['password'];
+    $loginincorrecto = true;
 
     $consulta = $bd->prepare("SELECT * FROM usuarios WHERE user = :user");
     $consulta->execute(['user' => $user]);
@@ -23,6 +24,7 @@ if (isset($_POST['user']) && isset($_POST['password'])) {
         $passwordBD = $fila['password'];
 
         if ($user == $userBD && password_verify($password, $passwordBD)) {
+            $loginincorrecto = false;
             setcookie("login", $user, time() + 3600);
             header("Location: zona_restringida.php");
         }
@@ -51,6 +53,11 @@ if (isset($_POST['user']) && isset($_POST['password'])) {
         </p>
         <input type="submit" value="Iniciar sesión">
     </form>
+    <?php
+    if (isset($loginincorrecto) && $loginincorrecto) {
+        echo "<p>Usuario o contraseña incorrectos</p>";
+    }
+    ?>
 </body>
 
 </html>
