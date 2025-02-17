@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<?php
+if (!isset($_COOKIE['user'])) {
+    header("Location: login.php");
+}
+?>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona Restringida</title>
+</head>
+
+<body>
+    <h1>Zona Restringida</h1>
+    <p>Bienvenido, <?= $_COOKIE['user']; ?></p>
+    <p><a href="logout.php">Cerrar sesión</a></p>
+</body>
+
+</html>
