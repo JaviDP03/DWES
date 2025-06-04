@@ -1,8 +1,9 @@
 # DWES - Desarrollo Web en Entorno Servidor
 
-[![PHP](https://img.shields.io/badge/PHP-8.1-blue?logo=php)](https://www.php.net/)
-[![HTML](https://img.shields.io/badge/HTML-5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/es/docs/Web/HTML)
+[![PHP](https://img.shields.io/badge/PHP-8.2-787CB4?logo=php)](https://www.php.net/)
 [![MariaDB](https://img.shields.io/badge/MariaDB-10.5-informational?logo=mariadb)](https://mariadb.org/)
+[![HTML](https://img.shields.io/badge/HTML-5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/es/docs/Web/HTML)
+[![CSS](https://img.shields.io/badge/CSS-5-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/es/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/es/docs/Web/JavaScript)
 
 Este repositorio contiene ejercicios, prácticas y material de la asignatura **Desarrollo Web en Entorno Servidor** (DWES) del ciclo de Desarrollo de Aplicaciones Web. El lenguaje principal trabajado es **PHP**.
