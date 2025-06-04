@@ -8,7 +8,7 @@
 
 Este repositorio contiene ejercicios, prácticas y material de la asignatura **Desarrollo Web en Entorno Servidor** (DWES) del ciclo de Desarrollo de Aplicaciones Web. El lenguaje principal trabajado es **PHP**.
 
-## Estructura del repositorio
+## 📁 Estructura del repositorio
 
 - **UT0**  
   Primeros pasos en la web: Formularios HTML y fundamentos del entorno del servidor.
